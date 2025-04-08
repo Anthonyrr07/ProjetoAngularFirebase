@@ -1,51 +1,41 @@
-<!-- ion-content é relativo tag body do html -->
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Título do meu App</ion-title>
-  </ion-toolbar>
+  <ion-row>
+    <ion-col>Seja bem vindo a essa bela página</ion-col>
+  </ion-row>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-row>
-    <ion-col size="6">
-      <ion-card>
-      <ion-item>
-        <ion-label>Opção 1</ion-label>
-      </ion-item>
-      <ion-button color="secondary">Lula</ion-button>
-    </ion-card>
-    </ion-col>
-    <ion-col size="6">
-      <ion-card>
-      <ion-item>
-        <ion-label>Opção 2</ion-label>
-      </ion-item>
-      <ion-button color="tertiary">Bolsonaro</ion-button>
-    </ion-card>
-    </ion-col>
-  </ion-row>
-        
-  <ion-row class="ion-justify-content-center">
-    <ion-col size="12" size-lg="6">
-        <ion-list>
-          <ion-item>
-            <ion-label>Brasil</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>China</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>EUA</ion-label>
-          </ion-item>
-        </ion-list>
-    </ion-col>
-  </ion-row>
-        
-      </ion-content>
+  
+<ion-item >
+<ion-button>Dragon Ball</ion-button>
+<ion-button>Naruto</ion-button>
+</ion-item>
 
 
-      <ion-footer>
-        <ion-toolbar>
-          <ion-title>Rodapé do Aplicativo</ion-title>
-        </ion-toolbar>
-      </ion-footer>
+<ion-card>
+  <ion-label>Prefiro Dragon Ball</ion-label>
+</ion-card>
+
+<ion-card>
+  <ion-label>Não tenho nada contra Naruto</ion-label>
+</ion-card>
+
+<ion-card>
+  <ion-label>Deixe a sua opinião</ion-label>
+</ion-card>
+
+<ion-list>
+  <ion-item>
+    <ion-label>Aqui contém uma lista</ion-label>
+	</ion-item>
+  <ion-item>
+    <ion-label style="ion-justify-content-center">Aqui contém uma lista igual a de cima</ion-label>
+	</ion-item>
+</ion-list>
+
+<img size="4" src="https://sm.ign.com/ign_br/cover/d/dragon-bal/dragon-ball-daima_eada.jpg" alt="">
+</ion-content>
+
+<ion-footer>
+  Direitos autorais meu 😁
+</ion-footer>
