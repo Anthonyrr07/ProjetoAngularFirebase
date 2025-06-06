@@ -6,6 +6,9 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { RouterLink } from '@angular/router';
+import { HeaderModule } from '../shared/components/header/header.module';
+import { FooterModule } from '../shared/components/footer/footer.module';
+import { SideMenuModule } from '../shared/components/side-menu/side-menu.module';
 
 
 @NgModule({
@@ -14,7 +17,9 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    RouterLink
+    HeaderModule,
+    FooterModule,
+    SideMenuModule
   ],
   declarations: [HomePage]
 })

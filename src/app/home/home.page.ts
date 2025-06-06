@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticateService } from '../services/auth.service';
 import { CrudService } from '../services/crud.service';
-import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
-import { MessageService } from '../services/message.service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -11,18 +8,34 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+    side_menu = [
+      {
+        icon: 'home',
+        name: 'Página Inicial',
+        selected: true
+      },
+      {
+        icon: 'cube',
+        name: 'Produtos',
+        selected: false
+      },
+      {
+        icon: 'person',
+        name: 'Produtos',
+        selected: false
+      },
+      {
+        icon: 'people-outline',
+        name: 'Clientes',
+        selected: false
+      },
+      {
+        icon: 'contacts',
+        name: 'Contato',
+        selected: false
+      }
 
-    pokemon: any = {
-      nome: null,
-      poder: null
+    ];
+   
 };
-
-  constructor(public crudService: CrudService 
-
-   ){ }
-
-
-    enviar(){
-        this.crudService.insert(this.pokemon, 'pokemons')
-    }
-}
+export class HomeModule { }
