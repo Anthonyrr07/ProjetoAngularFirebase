@@ -12,8 +12,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'sobre',
-    loadChildren: () => import('./sobre/sobre.module').then( m => m.SobrePageModule)
+    path: 'contato',
+    loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
+  },
+  {
+    path: 'sobre-nos',
+    loadChildren: () => import('./sobre-nos/sobre-nos.module').then( m => m.SobreNosPageModule)
+  },
+  {
+    path: 'produtos',
+    loadChildren: () => import('./produtos/produtos.module').then( m => m.ProdutosPageModule)
+  },
+  {
+    path: 'clientes',
+    loadChildren: () => import('./clientes/clientes.module').then( m => m.ClientesPageModule)
   }
 ];
 

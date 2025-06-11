@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-
 import { HomePageRoutingModule } from './home-routing.module';
-import { RouterLink } from '@angular/router';
+import { FooterModule } from 'src/shared/components/footer/footer.module';
+import { HeaderModule } from 'src/shared/components/header/header.module';
+import { SlideModule } from 'src/shared/components/slide/slide.module';
+
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { RouterLink } from '@angular/router';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    RouterLink
+    HeaderModule,
+    FooterModule,
+    SlideModule
   ],
   declarations: [HomePage]
 })
