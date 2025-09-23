@@ -28,7 +28,9 @@
     "@capacitor/keyboard": "5.0.2",
     "@capacitor/status-bar": "5.0.2",
     "@ionic/angular": "^7.0.0",
+    "@ionic/storage-angular": "^4.0.0",
     "ionicons": "^7.0.0",
+    "rxfire": "^6.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -38,7 +40,7 @@
     "@angular-eslint/builder": "^16.0.0",
     "@angular-eslint/eslint-plugin": "^16.0.0",
     "@angular-eslint/eslint-plugin-template": "^16.0.0",
-    "@angular-eslint/schematics": "^16.0.0",
+    "@angular-eslint/schematics": "^20.3.0",
     "@angular-eslint/template-parser": "^16.0.0",
     "@angular/cli": "^16.0.0",
     "@angular/compiler": "^16.0.0",
