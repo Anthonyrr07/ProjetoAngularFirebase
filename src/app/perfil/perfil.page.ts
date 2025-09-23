@@ -76,37 +76,50 @@ export class PerfilPage implements OnInit {
     } else this.mostrarErro('Selecione apenas imagens válidas.');
   }
 
-  uploadFoto() {
-    if (!this.arquivoFoto) return this.mostrarErro('Nenhuma imagem selecionada.');
-
-    const formData = new FormData();
-    formData.append('picture', this.arquivoFoto);
-
-    this.apiService.post('usuario/foto-upload', formData).subscribe({
-      next: (resp: any) => {
-        this.usuario.picture = resp.picture_url;
-        this.usuario.pictureUrl = this.getFotoPerfil(resp.picture_url);
-        this.arquivoFoto = null;
-        this.previewFoto = null;
-        this.mostrarSucesso('Foto de perfil atualizada!');
-      },
-      error: (err) => {
-        console.error(err);
-        this.mostrarErro('Erro ao atualizar foto');
-      }
-    });
+  uploadFoto(): void {
+  if (!this.arquivoFoto) {
+    this.mostrarErro('Nenhuma imagem selecionada.');
+    return;
   }
+
+  const formData = new FormData();
+  formData.append('picture', this.arquivoFoto);
+
+  this.apiService.post('usuario/foto-upload', formData).subscribe({
+    next: (resp: any) => {
+      this.usuario.picture = resp.picture_url;
+      this.usuario.pictureUrl = this.getFotoPerfil(resp.picture_url);
+      this.arquivoFoto = null;
+      this.previewFoto = null;
+      this.mostrarSucesso('Foto de perfil atualizada!');
+    },
+    error: (err) => {
+      console.error(err);
+      this.mostrarErro('Erro ao atualizar foto');
+    }
+  });
+}
 
   toggleEdicao() { this.editando = !this.editando; }
 
-  salvarPerfil() {
-    if (!this.usuario.name || !this.usuario.email) return this.mostrarErro('Nome e e-mail são obrigatórios');
-
-    this.apiService.post('usuario/editar', this.usuario).subscribe({
-      next: () => { this.editando = false; this.mostrarSucesso('Perfil atualizado!'); },
-      error: (err) => { console.error(err); this.mostrarErro('Erro ao salvar perfil'); }
-    });
+  salvarPerfil(): void {
+  if (!this.usuario.name || !this.usuario.email) {
+    this.mostrarErro('Nome e e-mail são obrigatórios');
+    return;
   }
+
+  this.apiService.post('usuario/editar', this.usuario).subscribe({
+    next: () => {
+      this.editando = false;
+      this.mostrarSucesso('Perfil atualizado!');
+    },
+    error: (err) => {
+      console.error(err);
+      this.mostrarErro('Erro ao salvar perfil');
+    }
+  });
+}
+
 
   // ========== POSTAGENS ==========
   onImagemPostagemSelecionada(event: any) {
@@ -119,24 +132,31 @@ export class PerfilPage implements OnInit {
     } else this.mostrarErro('Selecione uma imagem válida.');
   }
 
-  criarPostagem() {
-    const { conteudo, imagem } = this.novaPostagem;
-    if (!conteudo) return this.mostrarErro('Conteúdo é obrigatório.');
-
-    const formData = new FormData();
-    formData.append('description', conteudo);
-    if (imagem) formData.append('picture', imagem);
-
-    this.apiService.post('usuario/postagens', formData).subscribe({
-      next: (resp: any) => {
-        resp.fotoUrl = this.getFotoPostagem(resp.picture);
-        this.usuario.postagens.unshift(resp);
-        this.novaPostagem = { conteudo: '', imagem: null, previewImagem: null };
-        this.mostrarSucesso('Postagem publicada!');
-      },
-      error: (err) => { console.error(err); this.mostrarErro('Erro ao publicar postagem'); }
-    });
+  criarPostagem(): void {
+  const { conteudo, imagem } = this.novaPostagem;
+  if (!conteudo) {
+    this.mostrarErro('Conteúdo é obrigatório.');
+    return;
   }
+
+  const formData = new FormData();
+  formData.append('description', conteudo);
+  if (imagem) formData.append('picture', imagem);
+
+  this.apiService.post('usuario/postagens', formData).subscribe({
+    next: (resp: any) => {
+      resp.fotoUrl = this.getFotoPostagem(resp.picture);
+      this.usuario.postagens.unshift(resp);
+      this.novaPostagem = { conteudo: '', imagem: null, previewImagem: null };
+      this.mostrarSucesso('Postagem publicada!');
+    },
+    error: (err) => {
+      console.error(err);
+      this.mostrarErro('Erro ao publicar postagem');
+    }
+  });
+}
+
 
   // ========== FUNÇÕES AUTOMÁTICAS DE URL ==========
   getFotoPerfil(caminho: string | null): string {
