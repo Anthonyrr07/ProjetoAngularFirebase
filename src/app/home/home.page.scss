@@ -1,0 +1,116 @@
+ion-content {
+  --background: #1f1f1f; // fundo escuro
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 16px;
+
+  .scroll-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  ion-row {
+    width: 100%;
+  }
+
+  ion-col {
+    background: #2c2c2c; // card escuro
+    padding: 32px 24px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeIn 0.6s ease;
+  }
+
+  ion-item {
+    --background: transparent;
+    border: 1px solid #444; // borda mais escura
+    border-radius: 12px;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+
+    &:focus-within {
+      border-color: #4facfe;
+      box-shadow: 0 0 8px rgba(79, 172, 254, 0.4);
+    }
+
+    ion-input {
+      font-size: 16px;
+      padding: 8px 0;
+      color: #eee; // texto claro
+    }
+
+    ion-label {
+      font-weight: 600;
+      color: #ccc;
+    }
+  }
+
+  ion-button {
+    --background: linear-gradient(135deg, #4facfe, #3880ff); // degradê azul escuro
+    --border-radius: 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 16px rgba(56, 128, 255, 0.4);
+    transition: transform 0.2s ease;
+    width: 100%;
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      box-shadow: none;
+    }
+  }
+
+  p {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #aaa;
+
+    a {
+      color: #4facfe;
+      font-weight: bold;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  ion-text {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ddd;
+  }
+
+  ion-spinner {
+    margin-right: 8px;
+    color: #4facfe;
+  }
+}
+
+/* animação suave ao aparecer */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

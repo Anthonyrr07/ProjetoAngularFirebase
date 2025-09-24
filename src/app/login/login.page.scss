@@ -1,0 +1,228 @@
+ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg, #3880ff, #4facfe);
+    --color: #fff;
+    
+    ion-title {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+ion-content {
+  --background: #f2f5f9;
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    padding: 16px;
+    
+    form {
+      background: #fff;
+      padding: 32px 24px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 380px;
+      
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeIn 0.6s ease;
+    }
+  }
+
+  ion-item {
+    --background: transparent;
+    --highlight-color-focused: #3880ff;
+    --highlight-color-invalid: #eb445a;
+    --highlight-color-valid: #10dc60;
+    --border-radius: 12px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+
+    border: 1px solid #dfe4ea;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+
+    &.item-has-focus {
+      border-color: #3880ff;
+      box-shadow: 0 0 8px rgba(56, 128, 255, 0.3);
+    }
+  }
+
+  ion-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  ion-input {
+    font-size: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    color: #222;
+  }
+
+  ion-button {
+    margin-top: 10px;
+    --background: linear-gradient(135deg, #3880ff, #4facfe);
+    --border-radius: 12px;
+    --box-shadow: 0 6px 16px rgba(56, 128, 255, 0.4);
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease;
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    &:disabled {
+      --box-shadow: none;
+      opacity: 0.7;
+    }
+  }
+
+  .login-options {
+    text-align: center;
+    margin-top: 20px;
+    
+    p {
+      color: #666;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    
+    .social-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      
+      ion-button {
+        --background: transparent;
+        --border-color: #dfe4ea;
+        --color: #666;
+        --box-shadow: none;
+        --border-width: 1px;
+        --border-style: solid;
+        margin: 0;
+        flex: 1;
+        max-width: 120px;
+        
+        &:hover {
+          --background: #f8f9fa;
+        }
+      }
+    }
+    
+    .register-link {
+      margin-top: 24px;
+      
+      a {
+        color: #3880ff;
+        text-decoration: none;
+        font-weight: 600;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Estilos para o spinner de carregamento
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+  ion-spinner {
+    width: 48px;
+    height: 48px;
+    --color: #3880ff;
+  }
+}
+
+// Animações
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Efeito de pulso para o botão quando carregando
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+// Responsividade
+@media (max-width: 480px) {
+  ion-content {
+    .container {
+      padding: 12px;
+      
+      form {
+        padding: 24px 20px;
+        border-radius: 16px;
+      }
+    }
+    
+    ion-button {
+      --padding-top: 18px;
+      --padding-bottom: 18px;
+    }
+  }
+}
+
+@media (max-height: 600px) {
+  ion-content {
+    .container {
+      align-items: flex-start;
+      padding-top: 20px;
+    }
+  }
+}
+
+// Estados de validação
+.item-has-focus.ion-valid {
+  border-color: #10dc60;
+  box-shadow: 0 0 8px rgba(16, 220, 96, 0.3);
+}
+
+.item-has-focus.ion-invalid {
+  border-color: #eb445a;
+  box-shadow: 0 0 8px rgba(235, 68, 90, 0.3);
+}
+
+// Placeholder styling
+ion-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
