@@ -6,25 +6,23 @@ import { MessageService } from 'src/app/services/message.service';
 import { AlertController } from '@ionic/angular';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root', // Serviço disponível globalmente
 })
 
 export class CrudService {
-    isLoading: boolean = false;
-    handlerMessage = '';
-    roleMessage = '';
+    isLoading: boolean = false; // Indica se está processando alguma ação
+    handlerMessage = '';         // Mensagem de controle genérica
+    roleMessage = '';            // Mensagem de permissões/roles
     
     constructor(
-        public firestore: Firestore,
-        private _message: MessageService,
-        private _auth: AuthenticateService,
-        private _alertController: AlertController
+        public firestore: Firestore,             // Instância do Firestore
+        private _message: MessageService,       // Serviço para exibir mensagens
+        private _auth: AuthenticateService,     // Serviço de autenticação (não usado ativamente aqui)
+        private _alertController: AlertController // Para exibir alertas
     ) {}
 
     /*
-    * @description: Inserir um novo registro no banco de dados
-    * @param item: any
-    * @param collection: string
+    * Inserir um novo registro no banco de dados
     */
     insert(item: any, remoteCollectionName: string): Boolean {
         console.log(item)
@@ -35,9 +33,9 @@ export class CrudService {
             return false;
         }
 
-        this.isLoading = true;
+        this.isLoading = true; // Ativa carregamento
         const dbInstance = collection(this.firestore, remoteCollectionName);
-        addDoc(dbInstance, item)
+        addDoc(dbInstance, item) // Adiciona documento no Firestore
           .then(() => {
             this._message.show('Salvo com sucesso.');
             result = true;
@@ -46,29 +44,27 @@ export class CrudService {
             this._message.show('Erro ao salvar.');
           })
           .finally(() => {
-            this.isLoading = false;
+            this.isLoading = false; // Desativa carregamento
           });
         return result;
     }
 
     /*
-    * @description: Pegar todos os itens do banco de dados
-    * @param remoteCollection: string
+    * Pegar todos os itens de uma coleção
     */
     fetchAll(remoteCollectionName: string): Promise<any> {
-        //this._auth.isAdmin();
-        this.isLoading = true;
+        this.isLoading = true; // Ativa carregamento
         let data: any = [];
 
         const dbInstance = collection(this.firestore, remoteCollectionName);
         
-        data = getDocs(dbInstance)
+        data = getDocs(dbInstance) // Busca documentos
             .then((response) => {
                 return [
                     ...response.docs.map((item) => {
-                        return { ...item.data(), id: item.id 
-                    }; 
-                })];
+                        return { ...item.data(), id: item.id }; // Retorna dados + id do documento
+                    })
+                ];
             })
             .catch((_: any) => {
                 this._message.show('Erro ao buscar item.');
@@ -82,11 +78,9 @@ export class CrudService {
     }
 
     /*
-    * @description: Pegar um item usando um operador específico como = < > <> >= <=
-    * @param collection: string
+    * Pegar um item usando um operador específico (=, <, >, <=, >=, etc.)
     */
     async fetchByOperatorParam(fieldName: string, operator: WhereFilterOp, fieldValue: any, remoteCollectionName: string): Promise<any> {
-        //this._auth.isAdmin();
         this.isLoading = true;
         let data: any = [];
 
@@ -96,9 +90,9 @@ export class CrudService {
             .then((response) => {
                 return [
                     ...response.docs.map((item) => {
-                        return { ...item.data(), id: item.id 
-                    };
-                })];
+                        return { ...item.data(), id: item.id };
+                    })
+                ];
             })
             .catch((_: any) => {
                 this._message.show('Erro ao buscar item.');
@@ -112,23 +106,26 @@ export class CrudService {
     }
 
     /*
-    * @description: Pegar os itens utilizando o operador Like para consulta
-    * @param collection: string
+    * Pegar itens usando "Like" (início da string)
     */
     async fetchByLike(fieldName: string, fieldValue: string, remoteCollectionName: string): Promise<any> {
-        //this._auth.isAdmin();
         this.isLoading = true;
         let data: any = [];
 
-        const dbInstance = query(collection(this.firestore, remoteCollectionName), orderBy(fieldName), startAt(fieldValue), endAt(fieldValue + '\uf8ff'));
+        const dbInstance = query(
+            collection(this.firestore, remoteCollectionName), 
+            orderBy(fieldName), 
+            startAt(fieldValue), 
+            endAt(fieldValue + '\uf8ff') // Busca por prefixo
+        );
         
         data = getDocs(dbInstance)
             .then((response) => {
                 return [
                     ...response.docs.map((item) => {
-                        return { ...item.data(), id: item.id 
-                    };
-                })];
+                        return { ...item.data(), id: item.id };
+                    })
+                ];
             })
             .catch((_: any) => {
                 this._message.show('Erro ao buscar item.');
@@ -141,30 +138,24 @@ export class CrudService {
         return data;
     }
     
-
     /*
-    * @description: Atualizar um item do banco de dados
-    * @param id: item id string to locate and update record
-    * @param data: Object data to update
+    * Atualizar um item existente
     */
     update(id: string, data: any, remoteCollectionName: string): boolean {
-        //this._auth.isAdmin();
         this.isLoading = true;
         let result = false;
         
         const dataToUpdate = doc(this.firestore, remoteCollectionName, id);
 
         updateDoc(dataToUpdate, {
-            ...data
+            ...data // Atualiza campos fornecidos
         })
             .then(() => {
                 this._message.show('Informação Atualizada!');
                 result = true;
-                
             })
             .catch((_: any) => {
                 this._message.show('Erro ao atualizar.');
-                return [];
             })
             .finally(() => {
                 this.isLoading = false;
@@ -174,45 +165,40 @@ export class CrudService {
     }
 
     /*
-    * @description: Remover um item do banco de dados
-    * @param id: item id string to locate and remove document
+    * Remover um item do banco de dados
     */
     async remove(id: string, remoteCollectionName: string) {
-        //this._auth.isAdmin();
-
         const alert = await this._alertController.create({
             header: 'Essa ação não poderá ser revertida!',
             buttons: [
                 {
-                text: 'Cancelar',
-                role: 'cancel',
+                    text: 'Cancelar',
+                    role: 'cancel',
                 },
                 {
-                text: 'Confirmar Exclusão',
-                role: 'confirm',
+                    text: 'Confirmar Exclusão',
+                    role: 'confirm',
                 }
             ]
-            });
+        });
         
-            await alert.present();
+        await alert.present();
         
-            const { role } = await alert.onDidDismiss();
+        const { role } = await alert.onDidDismiss();
 
-            if (role == 'confirm') {
-                this.isLoading = true;
-                const dataToDelete = doc(this.firestore, remoteCollectionName, id)
-                deleteDoc(dataToDelete)
-                    .then(() => {
-                        this._message.show('Registro removido!');
-                    })
-                    .catch(()=> {
-                        this._message.show('Erro ao remover!');
-                    })
-                    .finally(()=> {
-                        this.isLoading = false;
-                    });
-            }
+        if (role == 'confirm') { // Se o usuário confirmou
+            this.isLoading = true;
+            const dataToDelete = doc(this.firestore, remoteCollectionName, id);
+            deleteDoc(dataToDelete)
+                .then(() => {
+                    this._message.show('Registro removido!');
+                })
+                .catch(() => {
+                    this._message.show('Erro ao remover!');
+                })
+                .finally(() => {
+                    this.isLoading = false;
+                });
         }
-
-
+    }
 }

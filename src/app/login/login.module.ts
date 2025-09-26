@@ -9,7 +9,7 @@ import { LoginPage } from './login.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule, // 👈 Aqui
+    FormsModule, 
     IonicModule,
     LoginPageRoutingModule
   ],

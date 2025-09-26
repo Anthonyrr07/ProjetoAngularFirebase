@@ -1,24 +1,39 @@
+<!-- Cabeçalho da página -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Conteúdo principal com padding (espaçamento interno) -->
 <ion-content class="ion-padding">
+
+  <!-- Formulário de login, ao enviar chama a função login() -->
   <form (submit)="login()">
+
+    <!-- Campo de Email -->
     <ion-item>
       <ion-label position="floating">Email</ion-label>
+      <!-- Two-way data binding [(ngModel)] vincula o valor à variável "email" -->
+      <!-- "name" é necessário para o ngModel em formulários -->
+      <!-- "required" torna o campo obrigatório -->
       <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
     </ion-item>
-
+    
+    <!-- Campo de Senha -->
     <ion-item>
       <ion-label position="floating">Senha</ion-label>
+      <!-- Campo do tipo senha (oculta caracteres digitados) -->
       <ion-input type="password" [(ngModel)]="senha" name="senha" required></ion-input>
     </ion-item>
 
+    <!-- Botão de Login -->
     <ion-button expand="block" type="submit" [disabled]="carregando">
+      <!-- Enquanto estiver carregando, mostra o spinner -->
       <ion-spinner *ngIf="carregando" name="dots"></ion-spinner>
+      <!-- Se não estiver carregando, mostra o texto "Entrar" -->
       <span *ngIf="!carregando">Entrar</span>
     </ion-button>
   </form>
+
 </ion-content>

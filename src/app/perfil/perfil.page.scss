@@ -1,6 +1,6 @@
 ion-header {
   ion-toolbar {
-    --background: linear-gradient(135deg, #1e1e1e, #2c2c2c); // fundo escuro
+    --background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
     --color: #fff;
     font-weight: bold;
     text-align: center;
@@ -12,7 +12,7 @@ ion-header {
 }
 
 ion-content {
-  --background: #121212; // fundo dark
+  --background: #121212;
   padding: 16px;
 
   /* Carregando */
@@ -54,7 +54,7 @@ ion-content {
 
     .foto-perfil:hover {
       transform: scale(1.05);
-      box-shadow: 0 12px 28px rgba(79,172,254,0.5);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6);
     }
 
     ion-button {
@@ -84,7 +84,7 @@ ion-content {
 
     &:focus-within {
       border-color: #4facfe;
-      box-shadow: 0 0 12px rgba(79,172,254,0.5);
+      box-shadow: 0 0 12px rgba(79,172,254,0.2);
     }
 
     ion-label {
@@ -106,7 +106,7 @@ ion-content {
     transition: transform 0.2s ease, filter 0.2s ease;
     --background: linear-gradient(135deg, #4facfe, #1e1e1e);
     color: #fff;
-    box-shadow: 0 6px 16px rgba(79,172,254,0.4);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
 
     &:hover {
       filter: brightness(1.2);
@@ -126,7 +126,7 @@ ion-content {
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(79,172,254,0.4);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.6);
     }
 
     ion-card-header {
@@ -175,7 +175,7 @@ ion-content {
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(79,172,254,0.4);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
     }
 
     img {

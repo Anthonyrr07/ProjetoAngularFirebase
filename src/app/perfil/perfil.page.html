@@ -1,37 +1,50 @@
+<!-- Cabeçalho da página -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Meu Perfil</ion-title>
+    <!-- Botão de logout alinhado à direita -->
     <ion-buttons slot="end">
-      <ion-button (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Conteúdo principal -->
 <ion-content class="ion-padding">
 
-  <!-- Carregando -->
+  <!-- Tela de carregamento -->
   <div *ngIf="carregando" class="ion-text-center">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Carregando perfil...</p>
   </div>
 
-  <!-- Perfil carregado -->
+  <!-- Exibe o perfil somente quando não estiver carregando e existir usuário -->
   <div *ngIf="!carregando && usuario">
 
-    <!-- Foto de Perfil -->
+    <!-- Foto de perfil com opção de alteração -->
     <div class="foto-container ion-text-center">
+      <!-- Mostra a foto atual ou a pré-visualização -->
       <img [src]="previewFoto || usuario.pictureUrl" class="foto-perfil" alt="Foto de perfil" />
+      
+      <!-- Input escondido para upload da foto -->
       <input type="file" #fileInput hidden accept="image/*" (change)="onFileSelected($event)">
+      
+      <!-- Botão para abrir o input escondido -->
       <ion-button fill="clear" (click)="fileInput.click()">
         <ion-icon name="camera-outline" slot="start"></ion-icon> Alterar Foto
       </ion-button>
+
+      <!-- Só aparece se uma nova foto for escolhida -->
       <ion-button *ngIf="arquivoFoto" color="success" (click)="uploadFoto()">Enviar Foto</ion-button>
     </div>
 
-    <!-- Dados do Usuário -->
+    <!-- Informações do usuário -->
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Nome</ion-label>
+        <!-- Editável apenas se "editando" for true -->
         <ion-input [readonly]="!editando" [(ngModel)]="usuario.name"></ion-input>
       </ion-item>
       <ion-item>
@@ -40,49 +53,66 @@
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Status</ion-label>
+        <!-- Sempre somente leitura -->
         <ion-input [readonly]="true" [value]="usuario.status"></ion-input>
       </ion-item>
     </ion-list>
 
-    <!-- Botões -->
+    <!-- Botões de edição/salvar/cancelar -->
     <div class="ion-margin-top">
+      <!-- Se não estiver editando -->
       <ion-button *ngIf="!editando" expand="block" (click)="toggleEdicao()">Editar Perfil</ion-button>
+      <!-- Se estiver editando -->
       <ion-button *ngIf="editando" expand="block" color="success" (click)="salvarPerfil()">Salvar Alterações</ion-button>
       <ion-button *ngIf="editando" expand="block" color="medium" fill="outline" (click)="toggleEdicao()">Cancelar</ion-button>
     </div>
 
-    <!-- Nova Postagem -->
+    <!-- Card para criar nova postagem -->
     <ion-card class="nova-postagem-card ion-margin-top">
-      <ion-card-header><ion-card-title>Criar Nova Postagem</ion-card-title></ion-card-header>
+      <ion-card-header>
+        <ion-card-title>Criar Nova Postagem</ion-card-title>
+      </ion-card-header>
+      <br>
       <ion-card-content>
+        <!-- Campo de texto para a postagem -->
         <ion-item>
           <ion-label position="stacked">Conteúdo</ion-label>
           <ion-textarea [(ngModel)]="novaPostagem.conteudo" placeholder="Escreva algo..."></ion-textarea>
         </ion-item>
+
+        <!-- Botão para adicionar imagem -->
         <div class="ion-text-center ion-margin-top">
           <input type="file" #imagemInput hidden accept="image/*" (change)="onImagemPostagemSelecionada($event)">
           <ion-button fill="outline" (click)="imagemInput.click()">Adicionar Imagem</ion-button>
         </div>
+
+        <!-- Pré-visualização da imagem escolhida -->
         <div *ngIf="novaPostagem.previewImagem" class="ion-text-center ion-margin-top">
           <img [src]="novaPostagem.previewImagem" class="preview-imagem" />
         </div>
+
+        <!-- Botão para publicar a postagem -->
         <ion-button expand="block" color="primary" class="ion-margin-top" (click)="criarPostagem()">Publicar</ion-button>
       </ion-card-content>
     </ion-card>
 
-    <!-- Postagens -->
+    <!-- Lista de postagens do usuário -->
     <ion-list *ngIf="usuario?.postagens?.length > 0; else semPostagens">
       <ion-item *ngFor="let post of usuario.postagens">
         <ion-card>
+          <!-- Exibe imagem da postagem se existir -->
           <img *ngIf="post.fotoUrl" [src]="post.fotoUrl" alt="Imagem da postagem" />
           <ion-card-header>
+            <!-- Exibe a data formatada ou mensagem alternativa -->
             <ion-card-subtitle>{{ post.data ? (post.data | date:'dd/MM/yyyy HH:mm') : 'Data indisponível' }}</ion-card-subtitle>
           </ion-card-header>
+          <!-- Conteúdo da postagem -->
           <ion-card-content>{{ post.description || 'Sem descrição' }}</ion-card-content>
         </ion-card>
       </ion-item>
     </ion-list>
 
+    <!-- Caso não existam postagens -->
     <ng-template #semPostagens>
       <div class="ion-text-center ion-padding">
         <ion-icon name="document-outline" size="large" color="medium"></ion-icon>

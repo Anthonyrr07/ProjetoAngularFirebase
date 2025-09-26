@@ -1,45 +1,56 @@
 <ion-content [fullscreen]="true">
+  <!-- Row centralizado para alinhar os elementos -->
   <ion-row class="ion-justify-content-center">
+    <!-- Coluna que ocupa 12 colunas no mobile e 6 no desktop -->
     <ion-col size="12" size-md="6">
       
-      <!-- Loading -->
+      <!-- Loading: aparece somente enquanto "loading = true" -->
       <ion-item *ngIf="loading">
         <ion-spinner></ion-spinner>
         <ion-label>Cadastrando...</ion-label>
       </ion-item>
 
-      <!-- Mensagens -->
+      <!-- Mensagens de sucesso ou erro -->
       <ion-item *ngIf="mensagem">
+        <!-- Se a mensagem contém 'Erro', aplica a cor vermelha (danger), senão verde (success) -->
         <ion-text [color]="mensagem.includes('Erro') ? 'danger' : 'success'">
           {{ mensagem }}
         </ion-text>
       </ion-item>
 
+      <!-- Campo Nome Completo -->
       <ion-item>
         <ion-input type="text" label="Nome Completo" [(ngModel)]="usuario.name"></ion-input>
       </ion-item>
 
+      <!-- Campo Email -->
       <ion-item>
         <ion-input type="email" label="E-mail" [(ngModel)]="usuario.email"></ion-input>
       </ion-item>
 
+      <!-- Campo Senha -->
       <ion-item>
         <ion-input type="password" label="Senha" [(ngModel)]="usuario.password"></ion-input>
       </ion-item>
 
+      <!-- Campo Confirmação de Senha -->
       <ion-item>
         <ion-input type="password" label="Confirmação de Senha" [(ngModel)]="usuario.password_confirmation"></ion-input>
       </ion-item>
 
+      <!-- Botão de cadastro -->
+      <!-- Desabilitado enquanto "loading = true" -->
       <ion-item>
         <ion-button (click)="cadastrarUsuario()" [disabled]="loading">
           Cadastrar-se
         </ion-button>
       </ion-item>
-<p>
-  Já tem uma conta?
-  <a routerLink="/login">Entrar</a>
-</p>
+
+      <!-- Link para login caso já tenha conta -->
+      <p>
+        Já tem uma conta?
+        <a routerLink="/login">Entrar</a>
+      </p>
 
     </ion-col>
   </ion-row>    
