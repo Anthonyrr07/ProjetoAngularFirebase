@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- Informa ao navegador que o documento é HTML5 e define o idioma principal como inglês -->
 
 <head>
-  <meta charset="utf-8" />
-  <title>Ionic App</title>
+  <meta charset="utf-8" /> <!-- Define o padrão de codificação de caracteres como UTF-8 (suporta acentos e símbolos) -->
+  <title>Ionic App</title> <!-- Define o título da aba do navegador -->
 
-  <base href="/" />
+  <base href="/" /> <!-- Define a base de todas as URLs relativas usadas na aplicação Angular/Ionic -->
 
+  <!-- Suporte para tema claro e escuro conforme configuração do sistema -->
   <meta name="color-scheme" content="light dark" />
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Configurações de viewport para deixar a aplicação responsiva em dispositivos móveis -->
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0,
+             minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Impede que navegadores interpretem números como links de telefone -->
   <meta name="format-detection" content="telephone=no" />
+
+  <!-- Remove o destaque azul ao tocar em elementos (Windows Phone / navegadores antigos) -->
   <meta name="msapplication-tap-highlight" content="no" />
 
+  <!-- Ícone exibido na aba do navegador -->
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
 
-  <!-- add to homescreen for ios -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <!-- Configurações específicas para iOS quando o app é adicionado à tela inicial -->
+  <meta name="apple-mobile-web-app-capable" content="yes" /> <!-- Permite abrir como app standalone -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> <!-- Define a cor da barra de status -->
 </head>
 
 <body>
+  <!-- Aqui é onde o Angular/Ionic injeta a aplicação -->
+  <!-- O componente raiz (AppComponent) é carregado dentro dessa tag -->
   <app-root></app-root>
 </body>
 
